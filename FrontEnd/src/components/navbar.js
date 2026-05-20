@@ -7,6 +7,26 @@ import { route, setRoute } from '../utils/router.js';
  * @returns {string} HTML string for the navbar
  */
 export function navbar() {
+  const isLoggedIn = !!localStorage.getItem('token');
+
+  const authButtonsDesktop = isLoggedIn ? `
+    <button data-route="/mytickets" class="flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg text-sm transition-colors">${icon('ticket')} My Tickets</button>
+    <button data-route="/profile" class="text-white/70 hover:text-white px-3 py-2 text-sm transition-colors border border-white/10 rounded-lg hover:border-white/30">Profile</button>
+    <button data-action="logout" class="text-white/70 hover:text-red-400 px-3 py-2 text-sm transition-colors border border-white/10 rounded-lg hover:border-red-400">Logout</button>
+  ` : `
+    <button data-route="/login" class="text-white/70 hover:text-white px-3 py-2 text-sm transition-colors">Sign In</button>
+    <button data-route="/register" class="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg text-sm transition-colors">Register</button>
+  `;
+
+  const authButtonsMobile = isLoggedIn ? `
+    <button data-route="/mytickets" class="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg text-sm w-fit">${icon('ticket')} My Tickets</button>
+    <button data-route="/profile" class="text-left text-white/80 text-sm">Profile</button>
+    <button data-action="logout" class="text-left text-red-400 text-sm">Logout</button>
+  ` : `
+    <button data-route="/login" class="text-left text-white/80 text-sm">Sign In</button>
+    <button data-route="/register" class="text-left text-white/80 text-sm">Register</button>
+  `;
+
   return `
   <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0f]/95 backdrop-blur-md border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,14 +37,10 @@ export function navbar() {
         </button>
         <div class="hidden md:flex items-center gap-8 text-sm">
           <button data-route="/" class="${route()==='/'?'text-red-400':'text-white/70 hover:text-white'} transition-colors">Movies</button>
-          <button data-route="/" class="text-white/70 hover:text-white transition-colors">Cinemas</button>
-          <button data-route="/" class="text-white/70 hover:text-white transition-colors">Offers</button>
-        </div>
+          </div>
         <div class="hidden md:flex items-center gap-3">
           <button class="p-2 text-white/70 hover:text-white transition-colors">${icon('search', 'w-5 h-5')}</button>
-          <button data-route="/login" class="text-white/70 hover:text-white px-3 py-2 text-sm transition-colors">Sign In</button>
-          <button data-route="/register" class="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg text-sm transition-colors">Register</button>
-          <button data-route="/confirmation/demo" class="flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg text-sm transition-colors">${icon('ticket')} My Tickets</button>
+          ${authButtonsDesktop}
         </div>
         <button id="mobileBtn" class="md:hidden p-2 text-white/70 hover:text-white">${icon('menu', 'w-5 h-5')}</button>
       </div>
@@ -32,9 +48,7 @@ export function navbar() {
         <button data-route="/" class="text-left text-white/80 text-sm">Movies</button>
         <button data-route="/" class="text-left text-white/80 text-sm">Cinemas</button>
         <button data-route="/" class="text-left text-white/80 text-sm">Offers</button>
-        <button data-route="/login" class="text-left text-white/80 text-sm">Sign In</button>
-        <button data-route="/register" class="text-left text-white/80 text-sm">Register</button>
-        <button data-route="/confirmation/demo" class="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg text-sm w-fit">${icon('ticket')} My Tickets</button>
+        ${authButtonsMobile}
       </div>
     </div>
   </nav>`;
@@ -47,6 +61,16 @@ export function bindNav() {
   document.querySelectorAll('[data-route]').forEach(btn => {
     btn.addEventListener('click', () => {
       setRoute(btn.dataset.route);
+    });
+  });
+
+  document.querySelectorAll('[data-action="logout"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      // Refresh the page or navigate to home to update nav state
+      setRoute('/');
+      window.location.reload();
     });
   });
   

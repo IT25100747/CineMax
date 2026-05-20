@@ -14,52 +14,93 @@ import { confirmationPage } from './screens/confirmation.js';
 import { notFound } from './screens/notFound.js';
 import { loginPage } from './screens/login.js';
 import { registerPage } from './screens/register.js';
-
+import { profilePage } from './screens/profile.js';
 
 /**
  * Main render function - routes to appropriate page based on URL
  */
 function render() {
   const { path, query, parts } = parseRoute();
-  
-  // Route to the appropriate page
+
+  console.log("Current Path:", path);
+  console.log("Route Parts:", parts);
+
+  // Home Page
   if (path === '/') {
-    return homePage();
+    homePage();
+    return;
   }
-  
-  if (parts[0] === 'movie') {
-    return detailPage(parts[1]);
+
+  // Movie Detail Page
+  // Example: /movie/1
+  if (parts[0] === 'movie' && parts[1]) {
+    console.log("Opening Movie Detail Page:", parts[1]);
+    detailPage(parts[1]);
+    return;
   }
-  
-  if (parts[0] === 'seats') {
-    return seatsPage(parts[1]);
+
+  // Seats Page
+  // Example: /seats/1
+  if (parts[0] === 'seats' && parts[1]) {
+    console.log("Opening Seats Page:", parts[1]);
+    seatsPage(parts[1], query);
+    return;
   }
-  
-  if (parts[0] === 'checkout') {
-    return checkoutPage(parts[1], query);
+
+  // Checkout Page
+  // Example: /checkout/1
+  if (parts[0] === 'checkout' && parts[1]) {
+    console.log("Opening Checkout Page:", parts[1]);
+    checkoutPage(parts[1], query);
+    return;
   }
-  
-  if (parts[0] === 'confirmation') {
-    return confirmationPage(parts[1], query);
+
+  // Confirmation Page
+  // Example: /confirmation/1
+  if (parts[0] === 'confirmation' && parts[1]) {
+    console.log("Opening Confirmation Page:", parts[1]);
+    confirmationPage(parts[1], query);
+    return;
   }
-  
+
+  // Login Page
   if (parts[0] === 'login') {
-    return loginPage();
+    loginPage();
+    return;
   }
-  
+
+  // Register Page
   if (parts[0] === 'register') {
-    return registerPage();
+    registerPage();
+    return;
   }
 
+  // Profile Page
+  if (parts[0] === 'profile') {
+    profilePage();
+    return;
+  }
+
+  // Admin Page
   if (parts[0] === 'admin') {
-  return adminPage(parts[1]);
-}
-  
-  return notFound('Page not found');
+    adminPage(parts[1]);
+    return;
+  }
+
+  // My Tickets Page
+  if (parts[0] === 'mytickets') {
+    import('./screens/mytickets.js').then(module => {
+      module.myTicketsPage();
+    });
+    return;
+  }
+
+  // Page Not Found
+  notFound('Page not found');
 }
 
-// Initialize the router with hashchange listener
+// Initialize router
 initRouter(render);
 
-// Initial render on page load
+// Initial page load
 render();
