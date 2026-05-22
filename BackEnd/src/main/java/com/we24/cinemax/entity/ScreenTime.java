@@ -1,4 +1,4 @@
-package main.java.com.we24.cinemax.entity;
+package com.we24.cinemax.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

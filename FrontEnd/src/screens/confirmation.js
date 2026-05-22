@@ -99,7 +99,7 @@ export async function confirmationPage(id, query) {
             
             <div class="mt-6 w-full text-center border-t border-gray-200 pt-4">
               <p class="text-gray-500 text-xs font-bold uppercase tracking-wider">Total Paid</p>
-              <p class="text-2xl font-black text-gray-900 mt-1">$${(ticket.totalPaid || 0).toFixed(2)}</p>
+              <p class="text-2xl font-black text-gray-900 mt-1">LKR ${(ticket.totalPaid || 0).toFixed(2)}</p>
             </div>
           </div>
 

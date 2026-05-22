@@ -35,7 +35,7 @@ export function icon(name, cls = 'w-4 h-4') {
  * @returns {string} Formatted currency string (e.g., "$12.99")
  */
 export function money(n) {
-  return `$${Number(n || 0).toFixed(2)}`;
+  return `LKR ${Number(n || 0).toFixed(2)}`;
 }
 
 /**

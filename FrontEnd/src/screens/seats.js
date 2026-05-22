@@ -226,7 +226,7 @@ function renderSeats(movie, showtime, reservedSeats = []) {
 
       <div class="flex items-center justify-center gap-6 mb-6 flex-wrap text-xs text-white/50">
         <span class="flex items-center gap-2"><b class="seat available !w-4 !h-4"></b>Available</span>
-        <span class="flex items-center gap-2"><b class="seat vip !w-4 !h-4"></b>VIP (+$4)</span>
+        <span class="flex items-center gap-2"><b class="seat vip !w-4 !h-4"></b>VIP (+LKR4)</span>
         <span class="flex items-center gap-2"><b class="seat selected !w-4 !h-4"></b>Selected</span>
         <span class="flex items-center gap-2"><b class="seat taken !w-4 !h-4"></b>Taken</span>
       </div>
@@ -243,7 +243,7 @@ function renderSeats(movie, showtime, reservedSeats = []) {
 
       <div class="flex items-center gap-2 mt-4 p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl max-w-sm mx-auto">
         ${icon('info','w-4 h-4 text-amber-400 flex-shrink-0')}
-        <p class="text-amber-300/80 text-xs">Rows A & B are VIP seats with extra legroom (+$4.00 surcharge)</p>
+        <p class="text-amber-300/80 text-xs">Rows A & B are VIP seats with extra legroom (+LKR 4.00 surcharge)</p>
       </div>
     </div>
 

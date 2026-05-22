@@ -1,4 +1,4 @@
-package main.java.com.we24.cinemax.service;
+package com.we24.cinemax.service;
 
 import com.we24.cinemax.model.ScreenTimeRequest;
 import com.we24.cinemax.model.ScreenTimeResponse;

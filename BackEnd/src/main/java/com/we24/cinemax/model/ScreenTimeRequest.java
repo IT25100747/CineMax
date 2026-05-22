@@ -1,4 +1,4 @@
-package main.java.com.we24.cinemax.model;
+package com.we24.cinemax.model;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package main.java.com.we24.cinemax.repository;
+package com.we24.cinemax.repository;
 
 import com.we24.cinemax.entity.ScreenTime;
 import org.springframework.data.jpa.repository.JpaRepository;
